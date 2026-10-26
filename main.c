@@ -36,18 +36,18 @@ ID:
     goto ID;
   }
   if (E->id[3] == '0' && E->id[4] == '0') {//25 paid leaves if id is STR00XXXXX
-    E->paidleaves = 25;
+    E->paidleaves = 4;
     E->salary = 100000;
   } else if (E->id[3] == '0' && E->id[4] == '1') {//20 paid leaves if id is STR01XXXXX
-    E->paidleaves = 20;
+    E->paidleaves = 3;
     E->salary = 10000;
   } else if (E->id[3] == '0' && E->id[4] == '2') {//12 paid leaves if id is STR02XXXXX
-    E->paidleaves = 12;
+    E->paidleaves = 2;
     E->salary = 1000;
   } else {
     goto ID;//asks to enter new id if none of the cases match
   }
-  E->sickleaves = 12;//sick leaves same for all
+  E->sickleaves = 3;//sick leaves same for all
   E->workingdays = 0;
 }
 
@@ -68,11 +68,15 @@ void salaryDay(struct Employee *E) {//function to calculate salary based on numb
   scanf("%d", &totalWorkingdays);
   printf("Enter No.of Working Days : ");
   scanf("%d", &E->workingdays);
+  if(totalWorkingdays<=0){
+    printf("Total working days must be greater than zero\n");
+    return;
+  }
   float finalSalary = ((float)E->workingdays /                 //formula for final salary based on working days
                        (totalWorkingdays - E->paidleaves - E->sickleaves)) *
                       E->salary;
   E->bonus = (finalSalary <= E->salary)//if final salary less than base salary, bonus is (finalSalary - E->salary) / E->salary * 100
-                 ? ((E->salary - finalSalary) / E->salary) * 100//if final salary is more than base salary, bonus is 20% if (finalSalary - E->salary) / E->salary * 100 > 30
+                 ? ((finalSalary - E->salary) / E->salary) * 100//if final salary is more than base salary, bonus is 20% if (finalSalary - E->salary) / E->salary * 100 > 30
                  : (((finalSalary - E->salary) / E->salary * 100 > 30)
                         ? 20
                         : ((finalSalary - E->salary) / E->salary * 100) + 10);//else the bonus is finalSalary - E->salary) / E->salary * 100) + 10 percent
