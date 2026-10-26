@@ -68,9 +68,7 @@ void salaryDay(struct Employee *E) {//function to calculate salary based on numb
   scanf("%d", &totalWorkingdays);
   printf("Enter No.of Working Days : ");
   scanf("%d", &E->workingdays);
-  float finalSalary = ((float)E->workingdays /                 //formula for final salary based on working days
-                       (totalWorkingdays - E->paidleaves - E->sickleaves)) *
-                      E->salary;
+  float finalSalary = ((float)(E->workingdays + E->paidleaves) / (totalWorkingdays - E->sickleaves)) * E->salary; //formula for final salary based on working days
   E->bonus = (finalSalary <= E->salary)//if final salary less than base salary, bonus is (finalSalary - E->salary) / E->salary * 100
                  ? ((E->salary - finalSalary) / E->salary) * 100//if final salary is more than base salary, bonus is 20% if (finalSalary - E->salary) / E->salary * 100 > 30
                  : (((finalSalary - E->salary) / E->salary * 100 > 30)
