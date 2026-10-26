@@ -80,9 +80,9 @@ void salaryDay(struct Employee *E) {//function to calculate salary based on numb
                  : (((finalSalary - E->salary) / E->salary * 100 > 30)
                         ? 20
                         : ((finalSalary - E->salary) / E->salary * 100) + 10);//else the bonus is finalSalary - E->salary) / E->salary * 100) + 10 percent
-  printf("Bonus : %f\n", (E->bonus > 0) ? E->bonus : 0.0f);
+  printf("Bonus : %.2f\n", (E->bonus > 0) ? E->bonus : 0.0f);
   finalSalary = E->salary * (1 + E->bonus / 100);//final salary 
-  printf("Final salary : %f\n", finalSalary);
+  printf("Final salary : %.2f\n", finalSalary);
   scanf("%c",&buffer);
 }
 
